@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="icon1.png">
+  <title>Experience</title>
+  <style>
+    body {
+      font-family: 'Trebuchet MS';
+      margin: 0;
+      background: #fff;
+      color: #111;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px 40px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    h1 span {
+      display: block;
+      font-weight: 400;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #111;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Small dropdown box */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: #555;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      padding: 10px 0;
+      border-radius: 8px;
+      width: 150px;
+      z-index: 1000;
+    }
+
+    .mobile-nav a {
+      padding: 10px 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .mobile-nav a:hover {
+      background: #444;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .experience {
+      margin: 0 40px 40px;
+    }
+
+    .location {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .location::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #0b1fb6;
+      margin-right: 8px;
+    }
+
+    .role {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .company {
+      font-weight: 400;
+    }
+
+    .date {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #0b1fb6;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 30px 40px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .mobile-nav.show {
+        display: flex;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      width: 100%;
+      background: #0b1fb6;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    footer h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .subscribe {
+      margin: 1.5rem auto;
+      width: min(400px, 96%);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      border-bottom: 2px solid rgba(255,255,255,.6);
+      padding-bottom: .5rem;
+    }
+
+    .subscribe input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      padding: .4rem 0;
+      outline: none;
+    }
+
+    .subscribe input::placeholder {
+      color: rgba(255,255,255,.8);
+    }
+
+    .send {
+      flex: none;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      color: #0b1fb6;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .2s ease;
+    }
+    .send:hover { transform: scale(1.1); }
+
+    .socials {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 0;
+      margin: 15px 0;
+    }
+    .socials a {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .15s ease;
+    }
+    .socials a:hover { transform: translateY(-3px); }
+    .socials svg { width: 18px; height: 18px; fill: #0b1fb6; }
+
+    .copy {
+      font-size: 0.8rem;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Work <span>Experience</span></h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="Resume.html">Resume</a>
+      <a href="Projects.html">Projects</a>
+      <a href="Contact.html">Contact</a>
+    </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="home.html">Home</a>
+    <a href="Resume.html">Resume</a>
+    <a href="Projects.html">Projects</a>
+    <a href="Contact.html">Contact</a>
+  </div>
+
+  <div class="experience">
+    <div class="location">Ibadan, Nigeria</div>
+    <div class="role">Junior Web Designer & Developer — <span class="company">Eduwidget & TechOga IIT</span></div>
+    <div class="date">March 2025 – Present</div>
+  </div>
+
+  <hr>
+
+  <div class="experience">
+    <div class="location">Worldwide</div>
+    <div class="role">Web & Mobile App Developer — <span class="company">Freelance</span></div>
+    <div class="date">January 2023 – Present</div>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('show');
+    });
+  </script>
+
+  <footer>
+    <h1>GET IN TOUCH</h1>
+  
+    <form class="subscribe" action="#" method="post" novalidate>
+      <input id="email" name="email" type="email" placeholder="Email Address" required>
+      <button class="send" type="submit" aria-label="Submit email">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13.172 12 7.757 6.586l1.414-1.414L16 11l-6.829 5.828-1.414-1.414L13.172 12z" />
+        </svg>
+      </button>
+    </form>
+  
+    <ul class="socials" aria-label="Social links">
+      <a href="https://www.linkedin.com/in/emmanuel-timileyin-owolabi-ba5b5137a"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/timi-xx"><i class="fab fa-github"></i></a>
+      <a href="mailto:owolabiemma15@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+    </ul>
+  
+    <p class="copy">© 2025 Timi Owolabi. Oyo State, Nigeria.</p>
+  </footer>
+</body>
+</html>

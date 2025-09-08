@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="icon1.png">
+  <title>Projects</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Trebuchet MS';
+      background: #0b1fb6;
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: white;
+      filter: blur(120px);
+      z-index: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 20;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      background: white;
+      border-radius: 4px;
+      transition: 0.4s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 6px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .menu {
+      position: absolute;
+      top: 80px;
+      right: 8px;
+      background: #555;
+      border-radius: 12px;
+      padding: 15px 25px;
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 15;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .menu a:hover {
+      color: #0ff;
+    }
+
+    .menu.show {
+      display: flex;
+    }
+
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 50px auto;
+      position: relative;
+      z-index: 5;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .project-card.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease-out;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .project-card img {
+      width: 100%;
+      display: block;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .project-info {
+      padding: 20px;
+    }
+
+    .project-info h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #0b1fb6;
+    }
+
+    .tags {
+      margin: 10px 0;
+    }
+
+    .tags span {
+      display: inline-block;
+      background: #0b1fb6;
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      margin: 5px 5px 0 0;
+      border-radius: 8px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid #0b1fb6;
+      border-radius: 12px;
+      color: #0b1fb6;
+      text-decoration: none;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    footer {
+      background: #0b1fb6;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    footer h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .subscribe {
+      margin: 1.5rem auto;
+      width: min(400px, 96%);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      border-bottom: 2px solid rgba(255,255,255,.6);
+      padding-bottom: .5rem;
+    }
+    .subscribe input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      padding: .4rem 0;
+      outline: none;
+    }
+    .subscribe input::placeholder {
+      color: rgba(255,255,255,.8);
+    }
+    .send {
+      flex: none;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      color: #0b1fb6;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .2s ease;
+    }
+    .send:hover { transform: scale(1.1); }
+
+    .socials {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 0;
+      margin: 15px 0;
+    }
+    .socials a {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .15s ease;
+    }
+    .socials a:hover { transform: translateY(-3px); }
+    .socials svg { width: 18px; height: 18px; fill: #0b1fb6; }
+
+    .copy {
+      font-size: 0.8rem;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Projects</div>
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="menu" id="menu">
+      <a href="home.html">Home</a>
+      <a href="Projects.html">Projects</a>
+      <a href="Resume.html">Resume</a>
+      <a href="Contact.html">Contact</a>
+    </div>
+  </div>
+
+  <div class="projects-container">
+
+    <div class="project-card">
+      <img src="E1.png" alt="Project Preview">
+      <img src="E2.png" alt="Project Preview">
+      <div class="project-info">
+        <h3>Euphony</h3>
+        <div class="tags">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+        </div>
+        <a href="https://timi-xx.github.io/Euphony/" class="btn">View</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="B1.png" alt="Project Preview">
+      <img src="B3.png" alt="Project Preview">
+      <div class="project-info">
+        <h3>Bejeweled</h3>
+        <div class="tags">
+          <span>Html</span>
+          <span>Css</span>
+          <span>TypeScript</span>
+          <span>(Angular)</span>
+        </div>
+        <a href="https://timi-xx.github.io/Bejeweled-Home-of-Style-and-Luxury/" class="btn">View</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="SB2.png" alt="Project Preview">
+      <img src="SB3.png" alt="Project Preview">
+      <div class="project-info">
+        <h3>StudioBeam.</h3>
+        <div class="tags">
+          <span>Html</span>
+          <span>Css</span>
+        <span>Python Django</span>
+        </div>
+        <a href="https://timi-xx.github.io/StudioBeam./" class="btn">View</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+        <img src="RL1.png" alt="Project Preview">
+        <img src="RL2.png" alt="Project Preview">
+        <div class="project-info">
+            <h3>Royal Lawrence</h3>
+            <div class="tags">
+                <span>Html</span>
+                <span>Css</span>
+                <span>Javascript</span>
+            </div>
+            <a href="https://timi-xx.github.io/royallawrencevet/" class="btn">View</a>
+        </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <h1>GET IN TOUCH</h1>
+
+    <form class="subscribe" action="#" method="post" novalidate>
+      <label for="email" class="visually-hidden"></label>
+      <input id="email" name="email" type="email" placeholder="Email Address" required>
+      <button class="send" type="submit" aria-label="Submit email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.172 12 7.757 6.586l1.414-1.414L16 11l-6.829 5.828-1.414-1.414L13.172 12z"/></svg>
+      </button>
+    </form>
+
+    <ul class="socials" aria-label="Social links">
+      <a href="https://www.linkedin.com/in/emmanuel-timileyin-owolabi-ba5b5137a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/timi-xx"><i class="fab fa-github"></i></a>
+      <a href="mailto:owolabiemma15@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+   </ul>
+
+    <p class="copy">© 2025 Timi Owolabi. Oyo State,Nigeria.</p>
+  </footer>
+
+  <script>
+    function toggleMenu(x) {
+      x.classList.toggle("active");
+      document.getElementById("menu").classList.toggle("show");
+    }
+
+    const cards = document.querySelectorAll('.project-card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cards.forEach(card => observer.observe(card));
+  </script>
+
+</body>
+</html>

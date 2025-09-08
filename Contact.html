@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="icon1.png">
+  <title>Contact Me</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Trebuchet MS';
+      background-color: #fff;
+      color: #0b1fb6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 0.8s ease;
+      overflow-x: hidden;
+    }
+
+    body.loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end; /* hamburger pushed right */
+      align-items: center;
+      padding: 10px 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu {
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .bar {
+      height: 4px;
+      width: 100%;
+      background: #333;
+      border-radius: 4px;
+      transition: all 0.4s ease;
+    }
+
+    .menu.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .nav-panel {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: #555;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 15px;
+      width: auto;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .nav-panel a {
+      color: #fff;
+      font-size: 14px;
+      text-decoration: none;
+      text-align: left;
+      padding: 6px 0;
+      transition: 0.3s;
+    }
+
+    .nav-panel a:hover {
+      color: #ddd;
+    }
+
+    .nav-panel.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin: 20px 0;
+      color: #0b1fb6;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #fff;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 30px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      margin: 10px 0;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .social-links {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #333;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    .form-box {
+      background: #fff;
+      border: 1px solid #fff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+      margin-bottom: 30px;
+    }
+
+    .form-box label {
+      display: block;
+      margin-bottom: 8px;
+      text-align: left;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .form-box input,
+    .form-box textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background: #fff;
+      color: #333;
+    }
+
+    .form-box textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    .form-box button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #0b1fb6;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-box button:hover {
+      background: #06208d;
+    }
+
+    @media (max-width: 480px) {
+      h1, h2 {
+        font-size: 20px;
+      }
+
+      .card, .form-box {
+        padding: 35px;
+      }
+
+      .card img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .form-box input,
+      .form-box textarea {
+        font-size: 14px;
+      }
+    }
+  
+    footer {
+      background: #0b1fb6;
+      color: #fff;
+      padding: 60px 80px;
+      text-align: center;
+    }
+
+    footer h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .subscribe {
+      margin: 1.5rem auto;
+      width: min(400px, 96%);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      border-bottom: 2px solid rgba(255,255,255,.6);
+      padding-bottom: .5rem;
+    }
+    .subscribe input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      padding: .4rem 0;
+      outline: none;
+    }
+    .subscribe input::placeholder {
+      color: rgba(255,255,255,.8);
+    }
+    .send {
+      flex: none;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      color: #0b1fb6;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .2s ease;
+    }
+    .send:hover { transform: scale(1.1); }
+
+    .socials {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 0;
+      margin: 15px 0;
+    }
+    .socials a {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .15s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="menu" id="menuBtn">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="nav-panel" id="navPanel">
+      <a href="home.html">Home</a>
+      <a href="Resume.html">Resume</a>
+      <a href="Projects.html">Projects</a>
+      <a href="Contact.html">Contact</a>
+    </div>
+  </header>
+
+  <h1>Connect With ME</h1>
+  <div class="card">
+    <img src="Pimage3.jpg" alt="Profile">
+    <h3>Timi Owolabi</h3>
+    <div class="social-links">
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i> - LinkedIn</a>
+      <a href="https://github.com" target="_blank"><i class="fab fa-github"></i> - GitHub</a>
+      <a href="mailto:example@email.com"><i class="fas fa-envelope"></i> - Mail</a>
+    </div>
+  </div>
+
+  <h2>Leave a Message</h2>
+  <div class="form-box">
+    <p style="margin-bottom:15px;"></p>
+    <form id="contactForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+      
+      <label for="message">Message</label>
+      <textarea id="message" required></textarea>
+      
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <footer>
+    <h1>GET IN TOUCH</h1>
+
+    <form class="subscribe" action="#" method="post" novalidate>
+      <label for="email" class="visually-hidden"></label>
+      <input id="email" name="email" type="email" placeholder="Email Address" required>
+      <button class="send" type="submit" aria-label="Submit email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.172 12 7.757 6.586l1.414-1.414L16 11l-6.829 5.828-1.414-1.414L13.172 12z"/></svg>
+      </button>
+    </form>
+
+    <ul class="socials" aria-label="Social links">
+      <a href="https://www.linkedin.com/in/emmanuel-timileyin-owolabi-ba5b5137a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/timi-xx"><i class="fab fa-github"></i></a>
+      <a href="mailto:owolabiemma15@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+   </ul>
+
+    <p class="copy">© 2025 Timi Owolabi. Oyo State,Nigeria.</p>
+  </footer>
+
+  <script>
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navPanel = document.getElementById("navPanel");
+
+    menuBtn.addEventListener("click", () => {
+      menuBtn.classList.toggle("active");
+      navPanel.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-panel a").forEach(link => {
+      link.addEventListener("click", () => {
+        menuBtn.classList.remove("active");
+        navPanel.classList.remove("active");
+      });
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", function(event){
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+
+      if(email && message){
+        alert("Message sent successfully!");
+        this.reset();
+      } else {
+        alert("Please fill all fields.");
+      }
+    });
+  </script>
+
+</body>
+</html>
