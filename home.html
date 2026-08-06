@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Timi Owolabi - Software Engineer specializing in Website, Web App, and Mobile App development.">
-  <meta property="og:title" content="Timi Owolabi - Portfolio">
-  <meta property="og:description" content="Explore projects, resume, and contact details of Timi Owolabi, a software engineer.">
+  <meta name="description"
+    content="Portfolio of Emmanuel Owolabi - Software Engineer specializing in Website, Web App, and Mobile App development.">
+  <meta property="og:title" content="Emmanuel Owolabi - Portfolio">
+  <meta property="og:description"
+    content="Explore projects, resume, and contact details of Timi Owolabi, a software engineer.">
   <meta property="og:type" content="website">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="Pimage3.jpg">
-  <title>Timi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="Pimage3.jpg">
+  <title>Emmanuel</title>
   <style>
     * {
       margin: 0;
@@ -36,7 +39,7 @@
       position: fixed;
       top: 0;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       z-index: 1000;
     }
 
@@ -67,7 +70,10 @@
       font-size: 0.95rem;
       transition: color 0.3s ease;
     }
-    nav a:hover { color: #0b1fb6; }
+
+    nav a:hover {
+      color: #0b1fb6;
+    }
 
     .hamburger {
       display: none;
@@ -90,9 +96,11 @@
     .hamburger.active span:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
     }
+
     .hamburger.active span:nth-child(2) {
       opacity: 0;
     }
+
     .hamburger.active span:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
@@ -115,7 +123,9 @@
       color: #111;
     }
 
-    nav.mobile.show { display: flex; }
+    nav.mobile.show {
+      display: flex;
+    }
 
     .hero {
       flex: 1;
@@ -130,7 +140,10 @@
     }
 
     @keyframes slideUp {
-      to { opacity: 1; transform: translateY(0); }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero img {
@@ -151,6 +164,7 @@
       justify-content: center;
       margin-top: 15px;
     }
+
     .buttonz a {
       display: flex;
       justify-content: center;
@@ -165,6 +179,7 @@
       color: #0b1fb6;
       transition: transform 0.3s ease, background 0.3s ease;
     }
+
     .buttonz a:hover {
       transform: scale(1.05);
       background: #0b1fb6;
@@ -178,6 +193,7 @@
       margin-top: 25px;
       flex-wrap: wrap;
     }
+
     .buttons a {
       display: flex;
       justify-content: center;
@@ -192,6 +208,7 @@
       color: #0b1fb6;
       transition: transform 0.3s ease, background 0.3s ease;
     }
+
     .buttons a:hover {
       transform: scale(1.05);
       background: #0b1fb6;
@@ -202,11 +219,13 @@
       padding: 80px 20px;
       text-align: center;
     }
+
     section h2 {
       font-size: 2rem;
       margin-bottom: 20px;
       color: #0b1fb6;
     }
+
     section p {
       max-width: 600px;
       margin: auto;
@@ -233,9 +252,10 @@
       display: flex;
       align-items: center;
       gap: .5rem;
-      border-bottom: 2px solid rgba(255,255,255,.6);
+      border-bottom: 2px solid rgba(255, 255, 255, .6);
       padding-bottom: .5rem;
     }
+
     .subscribe input {
       flex: 1;
       background: transparent;
@@ -245,9 +265,11 @@
       padding: .4rem 0;
       outline: none;
     }
+
     .subscribe input::placeholder {
-      color: rgba(255,255,255,.8);
+      color: rgba(255, 255, 255, .8);
     }
+
     .send {
       flex: none;
       width: 36px;
@@ -261,7 +283,10 @@
       cursor: pointer;
       transition: transform .2s ease;
     }
-    .send:hover { transform: scale(1.1); }
+
+    .send:hover {
+      transform: scale(1.1);
+    }
 
     .socials {
       list-style: none;
@@ -271,6 +296,7 @@
       padding: 0;
       margin: 15px 0;
     }
+
     .socials a {
       width: 36px;
       height: 36px;
@@ -280,8 +306,16 @@
       background: #fff;
       transition: transform .15s ease;
     }
-    .socials a:hover { transform: translateY(-3px); }
-    .socials svg { width: 18px; height: 18px; fill: #0b1fb6; }
+
+    .socials a:hover {
+      transform: translateY(-3px);
+    }
+
+    .socials svg {
+      width: 18px;
+      height: 18px;
+      fill: #0b1fb6;
+    }
 
     .copy {
       font-size: 0.8rem;
@@ -289,9 +323,9 @@
       opacity: 0.9;
     }
 
-  .btn {
-    margin-top: 10px;
-    background: #0b1fb6;
+    .btn {
+      margin-top: 10px;
+      background: #0b1fb6;
       text-decoration: none;
       color: #fff;
       padding: 12px;
@@ -300,16 +334,25 @@
     }
 
     @media (max-width: 768px) {
-      nav.desktop { display: none; }
-      .hamburger { display: flex; }
-      .hero h1 { font-size: 2rem; }
+      nav.desktop {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo">
-      <span></span> Timi <small style="margin-left:5px;font-weight:normal;">[Developer]</small>
+      <span></span> Emmanuel <small style="margin-left:5px;font-weight:normal;">[Developer]</small>
     </div>
 
     <nav class="desktop">
@@ -333,7 +376,7 @@
 
   <section class="hero">
     <img src="Pimage3.jpg" alt="Profile picture of Timi Owolabi" loading="lazy">
-    <h1>Timi Owolabi</h1>
+    <h1>Emmanuel Owolabi</h1>
     <div class="buttonz">
       <a href="home.html">Website/Webapp/Mobile App Developer</a>
     </div>
@@ -369,17 +412,21 @@
       <label for="email" class="visually-hidden"></label>
       <input id="email" name="email" type="email" placeholder="Email Address" required>
       <button class="send" type="submit" aria-label="Submit email">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.172 12 7.757 6.586l1.414-1.414L16 11l-6.829 5.828-1.414-1.414L13.172 12z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13.172 12 7.757 6.586l1.414-1.414L16 11l-6.829 5.828-1.414-1.414L13.172 12z" />
+        </svg>
       </button>
     </form>
 
     <ul class="socials" aria-label="Social links">
-      <a href="https://www.linkedin.com/in/emmanuel-timileyin-owolabi-ba5b5137a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+      <a
+        href="https://www.linkedin.com/in/emmanuel-timileyin-owolabi-ba5b5137a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i
+          class="fab fa-linkedin-in"></i></a>
       <a href="https://github.com/timi-xx"><i class="fab fa-github"></i></a>
       <a href="mailto:owolabiemma15@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
-   </ul>
+    </ul>
 
-    <p class="copy">© 2025 Timi Owolabi. Oyo State,Nigeria.</p>
+    <p class="copy">© 2025 Emmanuel Owolabi. Oyo State,Nigeria.</p>
   </footer>
 
   <script>
@@ -392,4 +439,5 @@
     });
   </script>
 </body>
+
 </html>
