@@ -45,33 +45,45 @@
     }
 
     .menu {
-      width: 30px;
-      height: 22px;
+      position: relative;
+      width: 32px;
+      height: 26px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       z-index: 1002;
+      background: transparent;
+      border: none;
     }
 
     .bar {
-      height: 4px;
+      position: absolute;
+      left: 0;
       width: 100%;
-      background: #333;
-      border-radius: 4px;
-      transition: all 0.4s ease;
+      height: 4px;
+      background: #0b1fb6;
+      border-radius: 999px;
+      transition: all 0.35s ease;
     }
 
+    .bar:nth-child(1) { top: 2px; }
+    .bar:nth-child(2) { top: 11px; }
+    .bar:nth-child(3) { top: 20px; }
+
     .menu.active .bar:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      top: 11px;
+      transform: rotate(45deg);
     }
 
     .menu.active .bar:nth-child(2) {
       opacity: 0;
+      transform: scaleX(0);
     }
 
     .menu.active .bar:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
+      top: 11px;
+      transform: rotate(-45deg);
     }
 
     .nav-panel {
@@ -293,6 +305,9 @@
       padding: 0;
       margin: 15px 0;
     }
+    .socials li {
+      list-style: none;
+    }
     .socials a {
       width: 36px;
       height: 36px;
@@ -301,6 +316,19 @@
       border-radius: 50%;
       background: #fff;
       transition: transform .15s ease;
+      color: #0b1fb6;
+      text-decoration: none;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
   </style>
 </head>
@@ -335,11 +363,11 @@
   <div class="form-box">
     <p style="margin-bottom:15px;"></p>
     <form id="contactForm">
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+      <label for="contact-email">Email</label>
+      <input type="email" id="contact-email" name="contact-email" required>
       
-      <label for="message">Message</label>
-      <textarea id="message" required></textarea>
+      <label for="contact-message">Message</label>
+      <textarea id="contact-message" name="contact-message" required></textarea>
       
       <button type="submit">Send</button>
     </form>
@@ -349,18 +377,18 @@
     <h1>GET IN TOUCH</h1>
 
     <form class="subscribe" action="#" method="post" novalidate>
-      <label for="email" class="visually-hidden"></label>
-      <input id="email" name="email" type="email" placeholder="Email Address" required>
+      <label for="subscribe-email" class="visually-hidden">Email Address</label>
+      <input id="subscribe-email" name="email" type="email" placeholder="Email Address" required>
       <button class="send" type="submit" aria-label="Submit email">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.172 12 7.757 6.586l1.414-1.414L16 11l-6.829 5.828-1.414-1.414L13.172 12z"/></svg>
       </button>
     </form>
 
     <ul class="socials" aria-label="Social links">
-      <a href="https://www.linkedin.com/in/emmanuel-timileyin-owolabi-ba5b5137a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://github.com/timi-xx"><i class="fab fa-github"></i></a>
-      <a href="mailto:owolabiemma15@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
-   </ul>
+      <li><a href="https://www.linkedin.com/in/emmanuel-timileyin-owolabi-ba5b5137a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+      <li><a href="https://github.com/timi-xx" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+      <li><a href="mailto:owolabiemma15@gmail.com" target="_blank" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a></li>
+    </ul>
 
     <p class="copy">© 2025 Emmanuel Owolabi. Oyo State,Nigeria.</p>
   </footer>
@@ -373,24 +401,26 @@
     const menuBtn = document.getElementById("menuBtn");
     const navPanel = document.getElementById("navPanel");
 
-    menuBtn.addEventListener("click", () => {
-      menuBtn.classList.toggle("active");
-      navPanel.classList.toggle("active");
-    });
-
-    document.querySelectorAll(".nav-panel a").forEach(link => {
-      link.addEventListener("click", () => {
-        menuBtn.classList.remove("active");
-        navPanel.classList.remove("active");
+    if (menuBtn && navPanel) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = menuBtn.classList.toggle("active");
+        navPanel.classList.toggle("active", isOpen);
       });
-    });
+
+      document.querySelectorAll(".nav-panel a").forEach(link => {
+        link.addEventListener("click", () => {
+          menuBtn.classList.remove("active");
+          navPanel.classList.remove("active");
+        });
+      });
+    }
 
     document.getElementById("contactForm").addEventListener("submit", function(event){
       event.preventDefault();
-      const email = document.getElementById("email").value;
-      const message = document.getElementById("message").value;
+      const email = document.getElementById("contact-email").value.trim();
+      const message = document.getElementById("contact-message").value.trim();
 
-      if(email && message){
+      if (email && message) {
         alert("Message sent successfully!");
         this.reset();
       } else {

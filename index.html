@@ -71,30 +71,40 @@
 
     .hamburger {
       display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 25px;
-      height: 20px;
+      position: relative;
+      width: 32px;
+      height: 26px;
       cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
     }
 
     .hamburger span {
-      display: block;
-      height: 3px;
+      position: absolute;
+      left: 0;
       width: 100%;
-      background: #111;
-      border-radius: 2px;
-      transition: all 0.3s ease;
+      height: 4px;
+      background: #0b1fb6;
+      border-radius: 999px;
+      transition: all 0.35s ease;
     }
 
+    .hamburger span:nth-child(1) { top: 2px; }
+    .hamburger span:nth-child(2) { top: 11px; }
+    .hamburger span:nth-child(3) { top: 20px; }
+
     .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      top: 11px;
+      transform: rotate(45deg);
     }
     .hamburger.active span:nth-child(2) {
       opacity: 0;
+      transform: scaleX(0);
     }
     .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
+      top: 11px;
+      transform: rotate(-45deg);
     }
 
     nav.mobile {
@@ -386,10 +396,21 @@
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobileNav');
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileNav.classList.toggle('show');
-    });
+    if (hamburger && mobileNav) {
+      const closeMenu = () => {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('show');
+      };
+
+      hamburger.addEventListener('click', () => {
+        const isOpen = hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('show', isOpen);
+      });
+
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+    }
   </script>
 </body>
 </html>

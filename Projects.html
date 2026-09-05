@@ -47,32 +47,44 @@
     }
 
     .hamburger {
-      width: 30px;
-      height: 22px;
       position: relative;
+      width: 32px;
+      height: 26px;
       cursor: pointer;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
       z-index: 20;
+      background: transparent;
+      border: none;
+      padding: 0;
     }
 
     .hamburger span {
-      display: block;
+      position: absolute;
+      left: 0;
+      width: 100%;
       height: 4px;
-      background: white;
-      border-radius: 4px;
-      transition: 0.4s;
+      background: #fff;
+      border-radius: 999px;
+      transition: all 0.35s ease;
     }
 
+    .hamburger span:nth-child(1) { top: 2px; }
+    .hamburger span:nth-child(2) { top: 11px; }
+    .hamburger span:nth-child(3) { top: 20px; }
+
     .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 6px);
+      top: 11px;
+      transform: rotate(45deg);
     }
     .hamburger.active span:nth-child(2) {
       opacity: 0;
+      transform: scaleX(0);
     }
     .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
+      top: 11px;
+      transform: rotate(-45deg);
     }
 
     .menu {
@@ -261,7 +273,7 @@
 
   <div class="navbar">
     <div class="logo">Projects</div>
-    <div class="hamburger" onclick="toggleMenu(this)">
+    <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
       <span></span>
       <span></span>
       <span></span>
@@ -275,6 +287,20 @@
   </div>
 
   <div class="projects-container">
+
+    <div class="project-card">
+      <img src="154.png" alt="Project Preview">
+      <img src="15461.png" alt="Project Preview">
+      <div class="project-info">
+        <h3>1546 Fragrance House</h3>
+        <div class="tags">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+        </div>
+        <a href="https://1546.vercel.app/" class="btn">View</a>
+      </div>
+    </div>
 
     <div class="project-card">
       <img src="K1.png" alt="Project Preview">
@@ -384,9 +410,23 @@
   </footer>
 
   <script>
-    function toggleMenu(x) {
-      x.classList.toggle("active");
-      document.getElementById("menu").classList.toggle("show");
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+
+    if (hamburger && menu) {
+      const closeMenu = () => {
+        hamburger.classList.remove('active');
+        menu.classList.remove('show');
+      };
+
+      hamburger.addEventListener('click', () => {
+        const isOpen = hamburger.classList.toggle('active');
+        menu.classList.toggle('show', isOpen);
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
     }
 
     const cards = document.querySelectorAll('.project-card');
